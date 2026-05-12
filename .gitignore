@@ -1,0 +1,6 @@
+.DS_Store
+
+# The binary itself is shipped as a GitHub Release asset, not committed.
+# Keep it locally for testing but don't accidentally re-add it.
+/miner
+/miner-*.tar.gz
