@@ -248,3 +248,4 @@ see <https://github.com/tevador/RandomX>.
 File an issue in this repo with: macOS version, Mac model (`mxmr info`
 output), the command you ran, and any error message. The events log
 (in the TUI / web UI / `--no-tui` stderr) usually has what's wrong.
+
