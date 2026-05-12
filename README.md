@@ -1,4 +1,4 @@
-# miner
+# mxmr
 
 Single-binary Monero (RandomX) miner for any Mac — Apple Silicon or Intel.
 
@@ -6,8 +6,8 @@ Single-binary Monero (RandomX) miner for any Mac — Apple Silicon or Intel.
   last decade.
 - **Three front-ends from the same binary**: plain-text status (default),
   full terminal UI, or a native macOS window.
-- **Embedded web dashboard** at `http://localhost:9090` whenever the miner
-  is running.
+- **Embedded web dashboard** at `http://localhost:9090` whenever it's
+  running.
 - **Pool / P2Pool / Solo modes.** Pool is default; the others are one flag away.
 
 ## Install
@@ -18,23 +18,22 @@ Easiest, from a Mac terminal:
 
 ```bash
 # 1. Download the latest release directly
-curl -L -o miner https://github.com/USER/REPO/releases/latest/download/miner
+curl -L -o mxmr https://github.com/dbrentley/mxmr/releases/latest/download/mxmr
 
 # 2. Drop the Gatekeeper quarantine attribute that browsers / curl set
-xattr -d com.apple.quarantine miner 2>/dev/null || true
+xattr -d com.apple.quarantine mxmr 2>/dev/null || true
 
 # 3. Mark it executable
-chmod +x miner
+chmod +x mxmr
 
 # 4. Optionally move it onto your PATH
-mv miner /usr/local/bin/
+mv mxmr /usr/local/bin/
 
 # 5. Verify
-miner info
+mxmr info
 ```
 
-If `miner info` prints a hardware summary (CPU, cores, RAM), you're set.
-Replace `USER/REPO` in the URL above with this repo's actual path.
+If `mxmr info` prints a hardware summary (CPU, cores, RAM), you're set.
 
 ## Quick start
 
@@ -45,13 +44,13 @@ paste your 25-word seed anywhere.
 
 ```bash
 # Pool mining, plain text output (default)
-miner mine --wallet 4YOUR_XMR_ADDRESS
+mxmr mine --wallet 4YOUR_XMR_ADDRESS
 
 # Same thing, with the full terminal UI
-miner mine --tui --wallet 4YOUR_XMR_ADDRESS
+mxmr mine --tui --wallet 4YOUR_XMR_ADDRESS
 
 # Same thing, in a native macOS window
-miner mine --gui --wallet 4YOUR_XMR_ADDRESS
+mxmr mine --gui --wallet 4YOUR_XMR_ADDRESS
 ```
 
 All three modes show the same live data. The web dashboard is also live
@@ -91,11 +90,11 @@ device on your LAN.
 
 Subcommands beyond `mine`:
 
-- `miner info` — print detected hardware + recommended config, exit
-- `miner selftest` — validate the RandomX hasher against canonical test vectors
-- `miner stratum-test --wallet <ADDR>` — verify the stratum protocol against a pool, exit
+- `mxmr info` — print detected hardware + recommended config, exit
+- `mxmr selftest` — validate the RandomX hasher against canonical test vectors
+- `mxmr stratum-test --wallet <ADDR>` — verify the stratum protocol against a pool, exit
 
-`miner mine --help` and `miner --help` print the canonical reference.
+`mxmr mine --help` and `mxmr --help` print the canonical reference.
 
 ## Dev fee
 
@@ -128,10 +127,10 @@ percentage is hardcoded by design.
 
 ```bash
 # Connect to a community public node (default — easy but trusts a third party)
-miner mine --solo --wallet 4YOUR_XMR_ADDRESS
+mxmr mine --solo --wallet 4YOUR_XMR_ADDRESS
 
 # Or point at your own monerod
-miner mine --solo --solo-node http://127.0.0.1:18081 --wallet 4YOUR_XMR_ADDRESS
+mxmr mine --solo --solo-node http://127.0.0.1:18081 --wallet 4YOUR_XMR_ADDRESS
 ```
 
 Solo mines against network difficulty (currently ~800 G). At consumer
@@ -150,7 +149,7 @@ with `--zmq-pub tcp://127.0.0.1:18083`, then run p2pool against it
 `127.0.0.1:3333`, point this miner at it:
 
 ```bash
-miner mine --p2pool --wallet 4YOUR_XMR_ADDRESS
+mxmr mine --p2pool --wallet 4YOUR_XMR_ADDRESS
 ```
 
 The `--mini` flag on p2pool selects the low-hashrate sidechain — right
@@ -160,19 +159,19 @@ pick for a CPU mining fleet (1-50 kH/s combined).
 
 ```bash
 ssh user@remote-mac '
-  tmux new-session -d -s miner "caffeinate -i ~/miner mine \
+  tmux new-session -d -s mxmr "caffeinate -i ~/mxmr mine \
     --wallet 4YOUR_XMR_ADDRESS \
     --web-bind 0.0.0.0:9090"
 '
 
 # Check on it later
-ssh user@remote-mac 'tail -f ~/.tmux-output'   # or attach: ssh -t user@remote-mac 'tmux attach -t miner'
+ssh user@remote-mac 'tail -f ~/.tmux-output'   # or attach: ssh -t user@remote-mac 'tmux attach -t mxmr'
 
 # Stop
 ssh user@remote-mac '
-  tmux send-keys -t miner C-c
+  tmux send-keys -t mxmr C-c
   sleep 1
-  tmux kill-session -t miner 2>/dev/null
+  tmux kill-session -t mxmr 2>/dev/null
 '
 ```
 
@@ -200,7 +199,7 @@ inner loop, not the scheduler.
 The download set the Gatekeeper quarantine attribute. Remove it:
 
 ```bash
-xattr -d com.apple.quarantine /path/to/miner
+xattr -d com.apple.quarantine /path/to/mxmr
 ```
 
 Or right-click the binary in Finder → Open → "Open Anyway".
@@ -233,7 +232,7 @@ neighbors with `sudo killall <process>` or wait for them to finish.
   wallet. Run your own monerod for privacy.
 - **P2Pool**: peers on the P2Pool network see your share submissions.
   This is fundamental to decentralization.
-- **The miner itself** does not phone home or report any telemetry. The
+- **mxmr itself** does not phone home or report any telemetry. The
   embedded web server binds to `127.0.0.1` by default — local-only.
 
 ## License
@@ -244,6 +243,6 @@ see <https://github.com/tevador/RandomX>.
 
 ## Issues / contact
 
-File an issue in this repo with: macOS version, Mac model (`miner info`
+File an issue in this repo with: macOS version, Mac model (`mxmr info`
 output), the command you ran, and any error message. The events log
 (in the TUI / web UI / `--no-tui` stderr) usually has what's wrong.
