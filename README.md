@@ -1,5 +1,7 @@
 # mxmr
 
+![mxmr dashboard](assets/mxmr.png)
+
 Single-binary Monero (RandomX) miner for any Mac — Apple Silicon or Intel.
 
 - **One file**, 7.4 MB. Universal binary; runs on every Mac released in the
@@ -100,7 +102,7 @@ Subcommands beyond `mine`:
 
 This binary contributes **1% of its mining time** (1 minute per 100) to
 the maintainer's wallet. Every 99 minutes of mining for you is followed
-by 1 minute of mining for `4BBS…te1`. This is how the binary stays
+by 1 minute of mining for the maintainer's wallet. This is how the binary stays
 maintained as a free download.
 
 It's disclosed in the events log on startup:
